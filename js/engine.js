@@ -28,6 +28,16 @@ let Engine = (function(global) {
     canvas.height = 606;
     doc.body.appendChild(canvas);
 
+        /* This function does some initial setup that should only occur once,
+     * particularly setting the lastTime variable that is required for the
+     * game loop.
+     */
+    function init() {
+        reset();
+        lastTime = Date.now();
+        main();
+    }
+
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
@@ -46,7 +56,6 @@ let Engine = (function(global) {
          */
         update(dt);
         render();
-
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
@@ -58,15 +67,7 @@ let Engine = (function(global) {
         win.requestAnimationFrame(main);
     }
 
-    /* This function does some initial setup that should only occur once,
-     * particularly setting the lastTime variable that is required for the
-     * game loop.
-     */
-    function init() {
-        reset();
-        lastTime = Date.now();
-        main();
-    }
+
 
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
@@ -91,9 +92,9 @@ let Engine = (function(global) {
      */
     function updateEntities(dt) {
         // allEnemies.forEach(function(enemy) {
-             enemy.update();
+        //     enemy.update(dt);
         // });
-        // player.update();
+        player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -137,7 +138,6 @@ let Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-        
         renderEntities();
     }
 
@@ -150,10 +150,10 @@ let Engine = (function(global) {
          * the render function you have defined.
          */
         // allEnemies.forEach(function(enemy) {
-             enemy.render();
+        //     enemy.render();
         // });
 
-        // player.render();
+        player.render(ctx);
     }
 
     /* This function does nothing but it could have been a good place to
@@ -168,6 +168,7 @@ let Engine = (function(global) {
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
+    Resources.onReady(init);
     Resources.load([
         'images/stone-block.png',
         'images/water-block.png',
@@ -175,11 +176,10 @@ let Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png'
     ]);
-    Resources.onReady(init);
+    
 
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily
      * from within their app.js files.
      */
-    global.ctx = ctx;
 })(this);
