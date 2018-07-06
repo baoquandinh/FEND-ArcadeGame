@@ -1,8 +1,8 @@
 class Player {
-    constructor(startX, startY){
+    constructor(){
         this.sprite = 'images/char-boy.png';
-        this.x = startX,
-        this.y = startY;
+        this.x = 0;
+        this.y = 0;
     }
     update(){
         //console.log("Updating player");
