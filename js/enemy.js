@@ -2,6 +2,8 @@
 class Enemy {
     constructor(){
         this.sprite = 'images/enemy-bug.png';
+        this.x = 0;
+        this.y = 0;
     }
     // Update the enemy's position
     // Parameter: dt, a time delta between ticks
@@ -12,7 +14,7 @@ class Enemy {
     };
 
     // Draw the enemy on the screen
-    render() {
+    render(ctx) {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     };
 };
