@@ -152,7 +152,7 @@ let Engine = (function(global) {
         // allEnemies.forEach(function(enemy) {
         //     enemy.render();
         // });
-
+        enemy.render(ctx);
         player.render(ctx);
     }
 
