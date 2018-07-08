@@ -164,7 +164,7 @@ let Engine = (function(global) {
     }
 
     function checkCollisions() {
-        if (enemy.x === (player.x) && enemy.y === player.y) {
+        if ((enemy.y >= player.y +100 || enemy.y <= player.y -100)) {
             console.log("You got hit!");
         }
     }
