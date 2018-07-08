@@ -92,7 +92,7 @@ let Engine = (function(global) {
         // allEnemies.forEach(function(enemy) {
         //     enemy.update(dt);
         // });
-        //enemy.update(dt);
+        enemy.update(dt);
         player.update(dt);
     }
 
@@ -164,8 +164,9 @@ let Engine = (function(global) {
     }
 
     function checkCollisions() {
-        if ((enemy.y >= player.y +100 || enemy.y <= player.y -100)) {
-            console.log("You got hit!");
+        if (player.y - enemy.y <= 66 && (Math.abs(player.y - enemy.y) < 64 ) && Math.abs(player.x - enemy.x) <= 70) {
+            console.log("Game Over");
+            reset();
         }
     }
 
