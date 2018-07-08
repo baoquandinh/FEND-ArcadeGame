@@ -6,38 +6,43 @@ class Player {
     constructor(){
         this.sprite = 'images/char-boy.png';
         this.x = 200;
-        this.y = 200;
+        this.y = 420;
     }
     handleInput(allowedKeys){
         this.inputKey = allowedKeys;
-        console.log(this.inputKey);
     }
-    update(){
-        console.log("Updating player");
-        console.log(this.inputKey);
+    update(dt){
         switch (this.inputKey) {
             case 'up':
-                this.y -=100;
+                this.y -= dt * 2000;
                 this.inputKey = null;
+                console.log(player.x, player.y);
                 break;
             case 'down':
-                this.y += 100;
+                this.y += dt * 2000;
                 this.inputKey = null;
+                console.log(player.x, player.y);
                 break;
                 case 'left':
-                this.x -= 100;
+                this.x -= dt * 2000;
                 this.inputKey = null;
+                console.log(player.x, player.y);
                 break;
                 case 'right':
-                this.x += 100;
+                this.x += dt * 2000;
                 this.inputKey = null;
+                console.log(player.x, player.y);
                 break;
             default:
-            console.log("Not moving");
         }
+        
     }
     render(ctx){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
 
+// 420.5 424.5 bottom right
+// 420.5 -10 top right
+// -7 -8 top left
+// -7 424.5 bottom left
