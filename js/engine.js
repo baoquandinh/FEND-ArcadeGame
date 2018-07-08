@@ -79,6 +79,7 @@ let Engine = (function(global) {
     function update(dt) {
         updateEntities(dt);
         checkCollisions();
+        checkWinCondition();
     }
 
     /* This is called by the update function and loops through all of the
@@ -89,10 +90,9 @@ let Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        // allEnemies.forEach(function(enemy) {
-        //     enemy.update(dt);
-        // });
-        enemy.update(dt);
+        allEnemies.forEach(function(enemy) {
+            enemy.update(dt);    
+        });
         player.update(dt);
     }
 
@@ -148,10 +148,9 @@ let Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        // allEnemies.forEach(function(enemy) {
-        //     enemy.render();
-        // });
-        enemy.render(ctx);
+        allEnemies.forEach(function(enemy) {
+            enemy.render(ctx);
+        });
         player.render(ctx);
     }
 
@@ -163,10 +162,26 @@ let Engine = (function(global) {
         // noop
     }
 
+    /* This function checks the player's position and the enemy position to see
+    *  if they are colliding with each other. If they are, the game will end.
+    */
     function checkCollisions() {
-        if (player.y - enemy.y <= 66 && (Math.abs(player.y - enemy.y) < 64 ) && Math.abs(player.x - enemy.x) <= 70) {
-            console.log("Game Over");
-            reset();
+        allEnemies.forEach(function(enemy){
+            if (player.y - enemy.y <= 66 && (Math.abs(player.y - enemy.y) < 60 ) && Math.abs(player.x - enemy.x) <= 70) {
+                console.log(`Game over, ${enemy.name} was the one that hit you!`);
+                console.log(`Position of ${enemy.name} that hit you was ${enemy.x} and ${enemy.y}`)
+                reset();
+            }
+        });
+    }
+
+    /* Checks if the player reaches the win condition, which would be reaching the river
+        For project submitting to Udacity, once player reaches the end, popup with "Congratulation you Win" should appear
+        For extra free time: Player should receive 1 point if they go to the river and back towards the starting point    
+    */
+    function checkWinCondition(){
+        if (player.y <= -6) {
+            console.log("You WON!")
         }
     }
 
