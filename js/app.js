@@ -4,8 +4,10 @@
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let player = new Player();
-let enemy = new Enemy(0,60);
-let allEnemies = [];
+let enemy1 = new Enemy(0,65,'first');
+let enemy2 = new Enemy(0,220,'second');
+let enemy3 = new Enemy(0,300, 'third');
+let allEnemies = [enemy1, enemy2, enemy3];
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
