@@ -17,25 +17,21 @@ class Player {
                 this.y -= dt * 2000;
                 this.inputKey = null;
                 console.log(player.x, player.y);
-                console.log(enemy.x, enemy.y);
                 break;
             case 'down':
                 this.y += dt * 2000;
                 this.inputKey = null;
                 console.log(player.x, player.y);
-                console.log(enemy.x, enemy.y);
                 break;
                 case 'left':
                 this.x -= dt * 2000;
                 this.inputKey = null;
                 console.log(player.x, player.y);
-                console.log(enemy.x, enemy.y);
                 break;
                 case 'right':
                 this.x += dt * 2000;
                 this.inputKey = null;
                 console.log(player.x, player.y);
-                console.log(enemy.x, enemy.y);
                 break;
             default:
         }
