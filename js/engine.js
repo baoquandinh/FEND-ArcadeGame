@@ -67,8 +67,6 @@ let Engine = (function(global) {
         win.requestAnimationFrame(main);
     }
 
-
-
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
      * you implement your collision detection (when two entities occupy the
@@ -80,7 +78,7 @@ let Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -94,7 +92,8 @@ let Engine = (function(global) {
         // allEnemies.forEach(function(enemy) {
         //     enemy.update(dt);
         // });
-        player.update();
+        //enemy.update(dt);
+        player.update(dt);
     }
 
     /* This function initially draws the "game level", it will then call
@@ -162,6 +161,12 @@ let Engine = (function(global) {
      */
     function reset() {
         // noop
+    }
+
+    function checkCollisions() {
+        if (enemy.x === (player.x) && enemy.y === player.y) {
+            console.log("You got hit!");
+        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to
