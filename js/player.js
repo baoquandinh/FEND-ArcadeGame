@@ -41,10 +41,3 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
-
-// 420.5 424.5 bottom right
-// 420.5 -10 top right
-// -7 -8 top left
-// -7 424.5 bottom left
-
-// hit y is 122-18

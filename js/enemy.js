@@ -6,6 +6,7 @@ class Enemy {
         this.y = startY;
         this.name = name;
     }
+    
     // Update the enemy's position
     // Parameter: dt, a time delta between ticks
     update(dt) {
