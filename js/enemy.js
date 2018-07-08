@@ -11,6 +11,10 @@ class Enemy {
         // You should multiply any movement by the dt parameter
         // which will ensure the game runs at the same speed for
         // all computers.
+        if (this.x >= 500) {
+            this.x = 0;
+        }
+        this.x += dt * 100;
     };
 
     // Draw the enemy on the screen
