@@ -55,6 +55,8 @@ let Engine = (function(global) {
          * our update function since it may be used for smooth animation.
          */
         update(dt);
+        checkCollisions();
+        checkWinCondition();
         render();
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -78,8 +80,6 @@ let Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        checkCollisions();
-        checkWinCondition();
     }
 
     /* This is called by the update function and loops through all of the
