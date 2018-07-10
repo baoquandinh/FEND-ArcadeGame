@@ -44,6 +44,10 @@ class Player {
         document.querySelector(".player-life").textContent = this.lifeRemaining;
     }
 
+    reset() {
+        this.x = 200, this.y = 420;
+    }
+
     render(ctx) {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
