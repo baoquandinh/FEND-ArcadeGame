@@ -33,7 +33,7 @@ let Engine = (function(global) {
      * game loop.
      */
     function init() {
-        reset();
+        // reset();
         lastTime = Date.now();
         main();
     }
@@ -119,7 +119,7 @@ let Engine = (function(global) {
             row, col;
         
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -160,6 +160,8 @@ let Engine = (function(global) {
      */
     function reset() {
         // noop
+        //ctx.clearRect(0,0,canvas.width,canvas.height);
+        player.x = 200, player.y = 420;
     }
 
     /* This function checks the player's position and the enemy position to see
@@ -170,7 +172,11 @@ let Engine = (function(global) {
             if (player.y - enemy.y <= 66 && (Math.abs(player.y - enemy.y) < 60 ) && Math.abs(player.x - enemy.x) <= 70) {
                 console.log(`Game over, ${enemy.name} was the one that hit you!`);
                 console.log(`Position of ${enemy.name} that hit you was ${enemy.x} and ${enemy.y}`)
+                player.loseLife();
                 reset();
+            }
+            if (player.lifeRemaining === 0) {
+                gameLoseScreen();
             }
         });
     }
@@ -181,9 +187,25 @@ let Engine = (function(global) {
     */
     function checkWinCondition(){
         if (player.y <= -6) {
-            console.log("You WON!")
+            gameWinScreen();
         }
     }
+
+    /* Shows the winner popup
+    */ 
+    function gameWinScreen(){
+        let winningScreen = document.getElementById('win-popup');
+        winningScreen.style.display = "block";
+        
+    }
+
+    /* Shows the loser popup
+    */ 
+   function gameLoseScreen(){
+        let gameLoseScreen = document.getElementById('lose-popup');
+        gameLoseScreen.style.display = "block";
+   }
+    
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
