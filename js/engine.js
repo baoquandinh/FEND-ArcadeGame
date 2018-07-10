@@ -23,6 +23,9 @@ let Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
+    let playAgain = document.getElementsByClassName('play-again');
+    let winningScreen = document.getElementById('win-popup');
+    let losingScreen = document.getElementById('lose-popup');
 
     canvas.width = 505;
     canvas.height = 606;
@@ -161,8 +164,13 @@ let Engine = (function(global) {
     function reset() {
         // noop
         //ctx.clearRect(0,0,canvas.width,canvas.height);
-        player.x = 200, player.y = 420;
+        //player.x = 200, player.y = 420;
+        console.log("Game should restart");
+        winningScreen.style.display = 'none';
+        losingScreen.style.display = 'none';
     }
+    playAgain.onclick = reset;
+    console.log(playAgain)
 
     /* This function checks the player's position and the enemy position to see
     *  if they are colliding with each other. If they are, the game will end.
@@ -173,7 +181,7 @@ let Engine = (function(global) {
                 console.log(`Game over, ${enemy.name} was the one that hit you!`);
                 console.log(`Position of ${enemy.name} that hit you was ${enemy.x} and ${enemy.y}`)
                 player.loseLife();
-                reset();
+                player.reset();
             }
             if (player.lifeRemaining === 0) {
                 gameLoseScreen();
@@ -194,7 +202,6 @@ let Engine = (function(global) {
     /* Shows the winner popup
     */ 
     function gameWinScreen(){
-        let winningScreen = document.getElementById('win-popup');
         winningScreen.style.display = "block";
         
     }
@@ -202,8 +209,7 @@ let Engine = (function(global) {
     /* Shows the loser popup
     */ 
    function gameLoseScreen(){
-        let gameLoseScreen = document.getElementById('lose-popup');
-        gameLoseScreen.style.display = "block";
+        losingScreen.style.display = "block";
    }
     
 
