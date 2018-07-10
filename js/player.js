@@ -3,15 +3,17 @@
 // a handleInput() method.
 
 class Player {
-    constructor(){
+    constructor() {
         this.sprite = 'images/char-boy.png';
         this.x = 200;
         this.y = 420;
+        this.lifeRemaining = parseInt(document.querySelector(".player-life").textContent);
+        // this.lifeCounter = parseInt(this.lifeRemaining);
     }
-    handleInput(allowedKeys){
+    handleInput(allowedKeys) {
         this.inputKey = allowedKeys;
     }
-    update(dt){
+    update(dt) {
         switch (this.inputKey) {
             case 'up':
                 this.y -= dt * 2000;
@@ -34,10 +36,15 @@ class Player {
                 console.log(player.x, player.y);
                 break;
             default:
-        }
-        
+        }     
     }
-    render(ctx){
+
+    loseLife() {
+        this.lifeRemaining -= 1;
+        document.querySelector(".player-life").textContent = this.lifeRemaining;
+    }
+
+    render(ctx) {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
