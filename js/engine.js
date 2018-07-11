@@ -23,10 +23,17 @@ let Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
+    let winPlayAgain = document.getElementById('win-play-again');
+    let losePlayAgain = document.getElementById('lose-play-again');
+    let winningScreen = document.getElementById('win-popup');
+    let losingScreen = document.getElementById('lose-popup');
+    let gameOver = false;
+    winPlayAgain.onclick = reset;
+    losePlayAgain.onclick = reset;
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    doc.getElementById('canvas').appendChild(canvas);
 
         /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
@@ -42,7 +49,8 @@ let Engine = (function(global) {
      * and handles properly calling the update and render methods.
      */
     function main() {
-        /* Get our time delta information which is required if your game
+        // if (gameOver === false) {
+            /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
          * would be the same for everyone (regardless of how fast their
@@ -54,20 +62,21 @@ let Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-        update(dt);
         checkCollisions();
         checkWinCondition();
+        update(dt);
         render();
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
         lastTime = now;
-
+    // }
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    }
+        
+}
 
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
@@ -119,7 +128,7 @@ let Engine = (function(global) {
             row, col;
         
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -154,13 +163,15 @@ let Engine = (function(global) {
         player.render(ctx);
     }
 
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+    /* Restarts the game
      */
     function reset() {
-        // noop
+        player.reset();
+        winningScreen.style.display = 'none';
+        losingScreen.style.display = 'none';
+        gameOver = false;
     }
+
 
     /* This function checks the player's position and the enemy position to see
     *  if they are colliding with each other. If they are, the game will end.
@@ -168,9 +179,11 @@ let Engine = (function(global) {
     function checkCollisions() {
         allEnemies.forEach(function(enemy){
             if (player.y - enemy.y <= 66 && (Math.abs(player.y - enemy.y) < 60 ) && Math.abs(player.x - enemy.x) <= 70) {
-                console.log(`Game over, ${enemy.name} was the one that hit you!`);
-                console.log(`Position of ${enemy.name} that hit you was ${enemy.x} and ${enemy.y}`)
-                reset();
+                player.loseLife();
+            }
+            if (player.lifeRemaining === 0) {
+                gameLoseScreen();
+                gameOver = true;
             }
         });
     }
@@ -181,9 +194,25 @@ let Engine = (function(global) {
     */
     function checkWinCondition(){
         if (player.y <= -6) {
-            console.log("You WON!")
+            gameOver = true;
+            gameWinScreen();
         }
     }
+
+    /* Shows the winner popup
+    */ 
+    function gameWinScreen(){
+        winningScreen.style.display = "block";
+        player.isOver = true;
+    }
+
+    /* Shows the loser popup
+    */ 
+   function gameLoseScreen(){
+        losingScreen.style.display = "block";
+        player.isOver = true;
+   }
+    
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
