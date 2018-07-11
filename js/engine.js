@@ -49,7 +49,7 @@ let Engine = (function(global) {
      * and handles properly calling the update and render methods.
      */
     function main() {
-        if (gameOver === false) {
+        // if (gameOver === false) {
             /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
@@ -70,7 +70,7 @@ let Engine = (function(global) {
          * for the next time this function is called.
          */
         lastTime = now;
-    }
+    // }
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
@@ -166,12 +166,10 @@ let Engine = (function(global) {
     /* Restarts the game
      */
     function reset() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
         player.reset();
         winningScreen.style.display = 'none';
         losingScreen.style.display = 'none';
         gameOver = false;
-        console.log(gameOver);
     }
 
 
@@ -196,8 +194,8 @@ let Engine = (function(global) {
     */
     function checkWinCondition(){
         if (player.y <= -6) {
-            gameWinScreen();
             gameOver = true;
+            gameWinScreen();
         }
     }
 
@@ -205,12 +203,14 @@ let Engine = (function(global) {
     */ 
     function gameWinScreen(){
         winningScreen.style.display = "block";
+        player.isOver = true;
     }
 
     /* Shows the loser popup
     */ 
    function gameLoseScreen(){
         losingScreen.style.display = "block";
+        player.isOver = true;
    }
     
 

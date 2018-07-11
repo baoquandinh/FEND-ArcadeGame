@@ -1,4 +1,4 @@
-// Now write your own player class
+// Now write your own this class
 // This class requires an update(), render() and
 // a handleInput() method.
 
@@ -7,54 +7,55 @@ class Player {
         this.sprite = 'images/char-boy.png';
         this.x = 200;
         this.y = 420;
+        this.constant = 1000;
+        this.isOver = false;
         this.lifeRemaining = parseInt(document.querySelector(".player-life").textContent);
-        // this.lifeCounter = parseInt(this.lifeRemaining);
     }
+
     handleInput(allowedKeys) {
-        this.inputKey = allowedKeys;
+        if (!this.isOver) {
+            this.inputKey = allowedKeys;
+        }
     }
+    // Updates the this
     update(dt) {
         switch (this.inputKey) {
             case 'up':
-                if (this.y < -16) {
-                    this.input = null;
-                } else {
-                    this.y -= dt * 2000;
-                    this.inputKey = null;
-                    console.log(player.x, player.y);
-                }     
+                this.y -= dt * this.constant;
+                this.inputKey = null;
+                console.log(this.x, this.y);
                 break;
             case 'down':
-                if (this.y > 440) {
-                    this.input = null;
-                } else {
-                    this.y += dt * 2000;
-                   this.inputKey = null;
-                    console.log(player.x, player.y);
-                }
+                this.y += dt * this.constant;
+                this.inputKey = null;
+                console.log(this.x, this.y);
                 break;
             case 'left':
-            if (this.x < -10) {
-                this.input = null;
-            } else {
-                this.x -= dt * 2000;
+                this.x -= dt * this.constant;
                 this.inputKey = null;
-                console.log(player.x, player.y);
-            }     
+                console.log(this.x, this.y);
                 break;
             case 'right':
-                if (this.x > 420) {
-                    this.input = null;
-                } else {
-                    this.x += dt * 2000;
-                    this.inputKey = null;
-                    console.log(player.x, player.y);    
-                }
+                this.x += dt * this.constant;
+                this.inputKey = null;
+                console.log(this.x, this.y);
                 break;
             default:
-            break;
-        }     
-        console.log(player.x , player.y);
+                break;
+        }
+        if (this.y < -15) {
+            this.y = -15;
+        }
+        if (this.y > 440) {
+            this.y = 440
+        }
+        if (this.x < -10) {
+            this.x = -10
+        }
+        if (this.x > 415) {
+            this.x = 415
+        }
+        console.log("Final:", this.x, this.y);
     }
 
     loseLife() {
@@ -66,10 +67,11 @@ class Player {
     reset() {
         this.x = 200, this.y = 420;
         this.lifeRemaining = 5;
+        this.isOver = false;
         document.querySelector(".player-life").textContent = this.lifeRemaining;
     }
 
-    default() {
+    default () {
         this.x = 200, this.y = 420;
     }
 
