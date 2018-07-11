@@ -7,10 +7,37 @@
     <title>Effective JavaScript: Frogger</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animation.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 </head>
 
 <body id='body'>
-    <div class='player-life'>5</div>
+    <!-- 
+        *
+        *
+        * THIS IS WHERE THE PLAYER IMAGE AND LIFE IS SET
+        *
+        *
+     -->
+    <div class='player-information'>
+        <div class='player-information-header>'>
+            <h2>Life Remaining:</h2>
+        </div>
+        <div class='player-icon'>
+            <img src="images/char-boy.png">
+        </div>
+        <div class='player-life'>
+            <p>5</p>
+        </div>
+    </div>
+
+    <!-- 
+        * 
+        *
+        * THIS SECTION HANDLES THE WINNER/LOSER POPUP
+        *
+        *
+     -->
     <div id='win-popup'>
         <div id='popup-content'>
             <div class='win-popup-header'>
@@ -37,6 +64,15 @@
             </div>
         </div>
     </div>
+
+    <!-- 
+        *
+        *
+        * THIS SECTION IS WHERE THE CANVAS IS DRAWN
+        *
+        *
+     -->
+    <div id='canvas'></div>
 
     <script src="js/resources.js"></script>
     <script src="js/player.js"></script>

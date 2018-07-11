@@ -33,7 +33,7 @@ let Engine = (function(global) {
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    doc.getElementById('canvas').appendChild(canvas);
 
         /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
