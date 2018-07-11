@@ -23,7 +23,7 @@ body {
 .win-popup-header, .win-popup-footer {
     padding: 2px 16px;
     color: white;
-    background-color: #5cb85c
+    background-color: #136F63;
 }
 
 .lose-popup-header, .lose-popup-footer {
@@ -37,9 +37,9 @@ body {
     padding-bottom: 15px;
 }
 
-.play-again {
+#win-play-again, #lose-play-again {
     color: white;
-    background-color: aqua;
+    background-color: #FFBA08;
     padding: 15px 32px;
     font-size: 16px;
     margin: 4px 2px;
