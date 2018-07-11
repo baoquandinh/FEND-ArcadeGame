@@ -16,35 +16,60 @@ class Player {
     update(dt) {
         switch (this.inputKey) {
             case 'up':
-                this.y -= dt * 2000;
-                this.inputKey = null;
-                console.log(player.x, player.y);
+                if (this.y < -16) {
+                    this.input = null;
+                } else {
+                    this.y -= dt * 2000;
+                    this.inputKey = null;
+                    console.log(player.x, player.y);
+                }     
                 break;
             case 'down':
-                this.y += dt * 2000;
-                this.inputKey = null;
-                console.log(player.x, player.y);
+                if (this.y > 440) {
+                    this.input = null;
+                } else {
+                    this.y += dt * 2000;
+                   this.inputKey = null;
+                    console.log(player.x, player.y);
+                }
                 break;
-                case 'left':
+            case 'left':
+            if (this.x < -10) {
+                this.input = null;
+            } else {
                 this.x -= dt * 2000;
                 this.inputKey = null;
                 console.log(player.x, player.y);
+            }     
                 break;
-                case 'right':
-                this.x += dt * 2000;
-                this.inputKey = null;
-                console.log(player.x, player.y);
+            case 'right':
+                if (this.x > 420) {
+                    this.input = null;
+                } else {
+                    this.x += dt * 2000;
+                    this.inputKey = null;
+                    console.log(player.x, player.y);    
+                }
                 break;
             default:
+            break;
         }     
+        console.log(player.x , player.y);
     }
 
     loseLife() {
         this.lifeRemaining -= 1;
         document.querySelector(".player-life").textContent = this.lifeRemaining;
+        this.x = 200, this.y = 420;
     }
 
     reset() {
+        this.x = 200, this.y = 420;
+        this.lifeRemaining = 5;
+        document.querySelector(".player-life").textContent = this.lifeRemaining;
+    }
+
+    default() {
         this.x = 200, this.y = 420;
     }
 
