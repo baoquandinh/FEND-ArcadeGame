@@ -12,4 +12,4 @@ When the game start, control the player by using the up,down,left and right arro
 If the browser you choose is Firefox, simply click anywhere on the screen before starting the game. Chrome does not have this issue.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE.md[LICENSE.md] file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
